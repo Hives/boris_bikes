@@ -13,7 +13,6 @@ describe DockingStation do
     @docking_station.dock(@bike1)
     expect(@docking_station.release_bike).to be_an_instance_of(Bike)
   end
-
   
   it "will release a bike that is working" do
     @docking_station.dock(@bike1) 
@@ -42,6 +41,14 @@ describe DockingStation do
   it "'dock' method raises an error if bike docked when there are already 20" do
     20.times { @docking_station.dock(Bike.new) }
     expect { @docking_station.dock(@bike1) }.to raise_error("Docking station full")
+  end
+
+  it "raise error if 'full?' private method called publicly" do
+    expect { @docking_station.full? }.to raise_error(NoMethodError)
+  end
+
+  it "raise error if 'empty?' private method called publicly" do
+    expect { @docking_station.empty? }.to raise_error(NoMethodError)
   end
 
 end

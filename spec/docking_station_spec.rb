@@ -32,12 +32,16 @@ describe DockingStation do
 
   it "allows 'bikes' instance variable to be accessed directly" do
     @docking_station.dock(@bike1)
-    @docking_station.dock(@bike2)
-    expect(@docking_station.bikes).to eq [@bike1, @bike2]
+    expect(@docking_station.bikes).to eq [@bike1]
   end
 
   it "'release_bike' method raises an error if no bikes are available" do
     expect { @docking_station.release_bike }.to raise_error("No bikes available")
   end
   
+  it "'dock' method raises an error if bike docked when there are already 20" do
+    20.times { @docking_station.dock(Bike.new) }
+    expect { @docking_station.dock(@bike1) }.to raise_error("Docking station full")
+  end
+
 end

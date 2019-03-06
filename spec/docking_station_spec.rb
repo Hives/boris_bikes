@@ -38,8 +38,8 @@ describe DockingStation do
     expect { @docking_station.release_bike }.to raise_error("No bikes available")
   end
   
-  it "'dock' method raises an error if bike docked when there are already 20" do
-    20.times { @docking_station.dock(Bike.new) }
+  it "'dock' method raises an error if bike docked when the station is at capacity" do
+    DockingStation::DEFAULT_CAPACITY.times { @docking_station.dock(Bike.new) }
     expect { @docking_station.dock(@bike1) }.to raise_error("Docking station full")
   end
 

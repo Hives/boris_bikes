@@ -8,6 +8,8 @@ class DockingStation
   end
 
   def release_bike
+    # raise "whoops"
+    raise "No bikes available" if @bikes.empty?
     Bike.new
   end
 
@@ -15,7 +17,4 @@ class DockingStation
     @bikes << bike
   end
 
-  def display_bikes
-    @bikes
-  end
 end
